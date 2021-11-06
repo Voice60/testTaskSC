@@ -53,6 +53,25 @@ function App() {
 
   let gamesArray = Object.keys(games)
   gamesArray.sort((a, b) => { return games[a].collections.popularity - games[b].collections.popularity })
+  
+  let currencyArray = []
+  gamesArray.forEach((game) => {
+    let arr = Object.keys(games[game].real)
+    arr.forEach(e => {
+      if (!currencyArray.includes(e)) {
+        currencyArray.push(e)
+      }
+    })
+  })
+
+  let providerArray = []
+  gamesArray.forEach((game) => {
+    let p = games[game].provider
+    if (!providerArray.includes(p)) {
+      providerArray.push(p)
+    }
+  })
+
   if (currency !== 'Валюта') {
     gamesArray = gamesArray.filter(game => {
       return Object.keys(games[game].real).includes(currency)
@@ -64,24 +83,6 @@ function App() {
       return games[game].provider === provider
     })
   }
-
-  let currencyArray = []
-  Object.keys(games).forEach((game) => {
-    let arr = Object.keys(games[game].real)
-    arr.forEach(e => {
-      if (!currencyArray.includes(e)) {
-        currencyArray.push(e)
-      }
-    })
-  })
-
-  let providerArray = []
-  Object.keys(games).forEach((game) => {
-    let p = games[game].provider
-    if (!providerArray.includes(p)) {
-      providerArray.push(p)
-    }
-  })
 
   gamesArray = gamesArray.slice(0, ArrayLength)
 
