@@ -10,6 +10,41 @@ import { addGames } from './redux/gamesReducer'
 
 import './App.css';
 
+const Container = styled.div`
+box-sizing: border-box;
+max-width: 1170px;
+width: 100%;
+padding: 15px;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+margin: 0 auto;
+justify-content: center;
+`
+
+const Main = styled.main`
+width: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+margin-bottom: 15px;
+`
+
+const More = styled.button`
+padding: 10px 15px;
+border: 1px solid #000;
+background-color: #ddd;
+margin: 0 auto;
+`
+const Select = styled.select`
+padding: 10px 15px;
+border: 1px solid #000;
+background-color: #ddd;
+width: 150px;
+margin: 0 20px 20px 20px;
+`
+
 function App() {
   const [currency, setCurrency] = useState('Валюта')
   const [provider, setProvider] = useState('Провайдер')
@@ -58,41 +93,6 @@ function App() {
   const showMore = () => {
     setArrayLength((prev => prev + 12))
   }
-
-  const Container = styled.div`
-    box-sizing: border-box;
-    max-width: 1170px;
-    width: 100%;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    justify-content: center;
-  `
-
-  const Main = styled.main`
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 15px;
-  `
-
-  const More = styled.button`
-    padding: 10px 15px;
-    border: 1px solid #000;
-    background-color: #ddd;
-    margin: 0 auto;
-  `
-  const Select = styled.select`
-    padding: 10px 15px;
-    border: 1px solid #000;
-    background-color: #ddd;
-    width: 150px;
-    margin: 0 20px 20px 20px;
-  `
 
   const MainPage = () => {
     return (
