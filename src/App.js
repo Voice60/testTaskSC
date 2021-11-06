@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
@@ -53,24 +53,33 @@ function App() {
 
   let gamesArray = Object.keys(games)
   gamesArray.sort((a, b) => { return games[a].collections.popularity - games[b].collections.popularity })
-  
-  let currencyArray = []
-  gamesArray.forEach((game) => {
-    let arr = Object.keys(games[game].real)
-    arr.forEach(e => {
-      if (!currencyArray.includes(e)) {
-        currencyArray.push(e)
+
+  const getCurrencyArray = () => {
+    const arr1 = []
+    gamesArray.forEach(game => {
+      const arr2 = Object.keys(games[game].real)
+      arr2.forEach(e => {
+        if (!arr1.includes(e)) {
+          arr1.push(e)
+        }
+      })
+    })
+    return arr1
+  }
+  const currencyArray = useMemo(() => getCurrencyArray(), [games])
+
+  const getProvidedArray = () => {
+    const arr = []
+    gamesArray.forEach(game => {
+      let p = games[game].provider
+      if (!arr.includes(p)) {
+        arr.push(p)
       }
     })
-  })
+    return arr
+  }
+  const providerArray = useMemo(() => getProvidedArray(), [games])
 
-  let providerArray = []
-  gamesArray.forEach((game) => {
-    let p = games[game].provider
-    if (!providerArray.includes(p)) {
-      providerArray.push(p)
-    }
-  })
 
   if (currency !== 'Валюта') {
     gamesArray = gamesArray.filter(game => {
